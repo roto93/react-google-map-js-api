@@ -1,34 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
 import './App.css'
+import { Wrapper } from '@googlemaps/react-wrapper'
+import Map from './components/Map'
+
+const center = { lat: 25.002338453763226, lng: 121.51201851318248 }
+const zoom = 15
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Wrapper
+        apiKey={import.meta.env.VITE_GOOGLE_MAP_API_KEY}
+        render={render}
+      >
+        <Map style={{ width: 500, height: '50%' }} center={center} zoom={zoom} />
+      </Wrapper>
     </div>
   )
 }
 
 export default App
+
+
+const render = (status) => {
+  console.log(status)
+  return (
+    <div>{status}</div>
+  )
+}
