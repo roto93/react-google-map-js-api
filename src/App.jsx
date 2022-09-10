@@ -1,6 +1,7 @@
 import './App.css'
 import { Wrapper } from '@googlemaps/react-wrapper'
 import Map from './components/Map'
+import Marker from './components/Marker'
 
 const center = { lat: 25.002338453763226, lng: 121.51201851318248 }
 const zoom = 15
@@ -13,7 +14,9 @@ function App() {
         apiKey={import.meta.env.VITE_GOOGLE_MAP_API_KEY}
         render={render}
       >
-        <Map style={{ width: 500, height: '50%' }} center={center} zoom={zoom} />
+        <Map style={{ width: 500, height: '50%' }} center={center} zoom={zoom} >
+          <Marker position={center} />
+        </Map>
       </Wrapper>
     </div>
   )

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import useDeepCompareEffect from 'use-deep-compare-effect'
-
+import React from 'react'
 
 const Map = ({
   onClick,
@@ -26,9 +26,15 @@ const Map = ({
     }
   }, [ref, map]);
 
-  return (<div ref={ref} id="map" style={style} >
-    {children}
-  </div>)
+  return (<>
+    <div ref={ref} style={style} />
+    {React.Children.map(children, (child) => {
+      if (React.isValidElement(child)) {
+        // set the map prop on the child component
+        return React.cloneElement(child, { map });
+      }
+    })}
+  </>)
 }
 
 export default Map
